@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<h1>Nasze Książki</h1>
+
+<tr th:each="book : ${books}">
+    <td th:text="${book.getTitle()}"></td>
+    <td th:text="${book.getAuthor()}"></td>
+    <hr>
+</tr>
+
+<form th:action="@{/book/addBook}" th:object="${newBook}" method="post">
+    <p>Name: <input type="text" placeholder="Tu wpisz autora" th:field="*{author}"></p>
+    <div th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+    <p>Title: <input type="text" placeholder="Tu wpisz tytuł książki" th:field="*{title}"></p>
+    <p><input type="submit" th:value="Add"></p>
+</form>
+
+<form th:action="@{/book/deleteBookByAuthor}" th:object="${authorToDeleteFromBase}" method="post">
+    <p>Author to delete: <input type="text" placeholder="Tu wpisz autora do usunięcia" th:field="*{name}"></p>
+    <p><input type="submit" th:value="DeleteAuthor"></p>
+</form>
+
+
+</body>
+</html>
