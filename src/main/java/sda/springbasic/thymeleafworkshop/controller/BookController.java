@@ -46,11 +46,11 @@ public class BookController {
     @PostMapping("/deleteBookByAuthor")
     public String deleteBookByAuthor (@ModelAttribute("authorToDeleteFromBase") AuthorToDelete authorToDelete) {
 
-        if (authorToDelete.name.isBlank()) {
+        if (authorToDelete.getName().isBlank()) {
             throw new IllegalArgumentException("Nie może być pusty.");
         }
 
-         if(!books.removeIf(b-> b.getAuthor().equals(authorToDelete.name))) {
+         if(!books.removeIf(b-> b.getAuthor().equals(authorToDelete.getName()))) {
              throw new AuthorDoesNotExist();
          }
          return "redirect:/book/all";
