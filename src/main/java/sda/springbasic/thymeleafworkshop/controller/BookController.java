@@ -34,6 +34,9 @@ public class BookController {
 
         if (result.hasErrors()) {
             model.addAttribute("books", books);
+            model.addAttribute("newBook", new Book());
+            model.addAttribute("authorToDeleteFromBase", new AuthorToDelete());
+            System.out.println(result.getAllErrors());
             return "book";
         }
 
