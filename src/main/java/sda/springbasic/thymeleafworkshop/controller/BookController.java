@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import sda.springbasic.thymeleafworkshop.exceptions.AuthorDoesNotExist;
 import sda.springbasic.thymeleafworkshop.model.AuthorToDelete;
 import sda.springbasic.thymeleafworkshop.model.Book;
 
@@ -33,8 +34,7 @@ public class BookController {
 
         if (result.hasErrors()) {
             model.addAttribute("books", books);
-            return "redirect:/book/all";
-//            return "book";
+            return "book";
         }
 
         System.out.println(book);
@@ -47,10 +47,12 @@ public class BookController {
     public String deleteBookByAuthor (@ModelAttribute("authorToDeleteFromBase") AuthorToDelete authorToDelete) {
 
         if (authorToDelete.name.isBlank()) {
-            throw new IllegalArgumentException("Błędne dane");
+            throw new IllegalArgumentException("Nie może być pusty.");
         }
 
-         books.removeIf(b-> b.getAuthor().equals(authorToDelete.name));
+         if(!books.removeIf(b-> b.getAuthor().equals(authorToDelete.name))) {
+             throw new AuthorDoesNotExist();
+         }
          return "redirect:/book/all";
     }
 

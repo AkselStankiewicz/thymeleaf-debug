@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class Book {
     @NotEmpty(message = "Pole nie może być puste")
     private String title;
-    @NotNull
+    @NotEmpty(message = "Pole nie może być puste")
     private String author;
 }

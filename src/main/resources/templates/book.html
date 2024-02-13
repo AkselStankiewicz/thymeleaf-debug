@@ -17,6 +17,7 @@
     <p>Name: <input type="text" placeholder="Tu wpisz autora" th:field="*{author}"></p>
     <div th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
     <p>Title: <input type="text" placeholder="Tu wpisz tytuł książki" th:field="*{title}"></p>
+    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
     <p><input type="submit" th:value="Add"></p>
 </form>
 
